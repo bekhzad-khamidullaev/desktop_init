@@ -13,7 +13,7 @@ install_powertop:
 
 setup_systemd:
 	@echo "Creating systemd service for powertop..."
-	sudo bash -c 'cat > $(POWERTOP_SERVICE_PATH) << EOF
+	sudo bash -c "cat > $(POWERTOP_SERVICE_PATH) << EOF
 [Unit]
 Description=PowerTOP tunings
 After=multi-user.target
@@ -25,9 +25,10 @@ ExecStart=/usr/sbin/powertop --auto-tune
 
 [Install]
 WantedBy=multi-user.target
-EOF'
+EOF"
 	sudo systemctl daemon-reload
 	sudo systemctl enable --now powertop
+
 
 optimize_system:
 	@echo "Applying additional system optimizations..."
