@@ -13,18 +13,18 @@ install_powertop:
 
 setup_systemd:
 	@echo "Creating systemd service for powertop..."
-	sudo bash -c "cat > $(POWERTOP_SERVICE_PATH) << EOF
-[Unit]
-Description=PowerTOP tunings
-After=multi-user.target
-
-[Service]
-Type=oneshot
-RemainAfterExit=yes
-ExecStart=/usr/sbin/powertop --auto-tune
-
-[Install]
-WantedBy=multi-user.target
+	sudo bash -c "cat > $(POWERTOP_SERVICE_PATH) << 'EOF'\n\
+[Unit]\n\
+Description=PowerTOP tunings\n\
+After=multi-user.target\n\
+\n\
+[Service]\n\
+Type=oneshot\n\
+RemainAfterExit=yes\n\
+ExecStart=/usr/sbin/powertop --auto-tune\n\
+\n\
+[Install]\n\
+WantedBy=multi-user.target\n\
 EOF"
 	sudo systemctl daemon-reload
 	sudo systemctl enable --now powertop
